@@ -24,15 +24,17 @@ $msg = "";
 global $oldest_update_epoch;
 
 // load ini file into an array	
-$ini_array = parse_ini_file("local_config.ini", true); // look for a local copy first
-if (!$ini_array) {
+if (file_exists("local_config.ini")) {
+	$ini_array = parse_ini_file("local_config.ini", true);
+} else {
 	$ini_array = parse_ini_file("config.ini", true); // load the main one
-} elseif(!$ini_array) {
-	$xml = c_initiate_xml($ini_array);
-	$xml_error = $xml->addchild('error');
-	$xml_error->addchild('code', '500');
-	$xml_error->addchild('description', 'Configuration files were not found.  Please review the README.txt file.');
-	c_announce($xml);
+	if(!$ini_array) {
+		$xml = c_initiate_xml($ini_array);
+		$xml_error = $xml->addchild('error');
+		$xml_error->addchild('code', '500');
+		$xml_error->addchild('description', 'Configuration files were not found.  Please review the README.txt file.');
+		c_announce($xml);
+	}
 }
 
 $db_link = dbf_connectDB($ini_array);
@@ -45,6 +47,7 @@ if(!$cache_stats) { // new install or empty statistics table
 	full_db_load($ini_array);
 	dbf_update_stats($db_link);
 	$cache_stats = dbf_cache_stats($db_link);
+	dbf_new_database($db_link);
 }
 
 $seconds_since_last_update = time() - $cache_stats[last_db_update_epoch];
