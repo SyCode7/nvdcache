@@ -14,12 +14,12 @@ PURPOSE.
 */
 
 function dbf_connectDB($ini_array) {
-	$db_link = mysqli_connect($ini_array[database][host], $ini_array[database][user], $ini_array[database][password], $ini_array[database][db_name]);
+	$db_link = mysqli_connect($ini_array[database][host], $ini_array[database][user], $ini_array[database][password], $ini_array[database][db_name], $ini_array[database][port], $ini_array[database][socket]);
 	if(!$db_link) {
 		$xml = c_initiate_xml($ini_array);
 		$xml_error = $xml->addchild('error');
 		$xml_error->addchild('code', '500');
-		$xml_error->addchild('description', 'DB Error: '.mysqli_error($db_link));
+		$xml_error->addchild('description', 'DB Error trying to connect.');
 		c_announce($xml);
 	}
 	//mysqli_autocommit($db_link, FALSE); // turning off auto commit to be safer.
@@ -70,6 +70,8 @@ function dbf_put_cve_in_db($cve, $db_link) {
 	if($cve[refs]) {
 		foreach ($cve[refs] as $key => $row) {
 			$row[ref_txt] = mysqli_real_escape_string($db_link, $row[ref_txt]);
+			$row[ref_source] = mysqli_real_escape_string($db_link, $row[ref_source]);
+			$row[ref_patch] = mysqli_real_escape_string($db_link, $row[ref_patch]);
 			$query = "INSERT INTO cve_ref (cve_name, ref_source, ref_url, ref_patch, ref_text) VALUES ('$cve[cve_name]', '$row[ref_source]', '$row[ref_url]', '$row[ref_patch]', '$row[ref_txt]')";
 			if(!$result = mysqli_query($db_link, $query)) {
 				$xml = c_initiate_xml($ini_array);
@@ -96,6 +98,9 @@ function dbf_put_cve_in_db($cve, $db_link) {
 		//echo "in prg\n";
 		foreach ($cve[cve_prod] as $key2 => $row2) {
 			//echo "in foreach\n";
+			$row2[prod_name] = mysqli_real_escape_string($db_link, $row2[prod_name]);
+			$row2[prod_vendor] = mysqli_real_escape_string($db_link, $row2[prod_vendor]);
+			$row2[prod_ver] = mysqli_real_escape_string($db_link, $row2[prod_ver]);
 			$query = "INSERT INTO cve_prod (cve_name, prod_name, prod_vendor, vers_num) VALUES ('$cve[cve_name]', '$row2[prod_name]', '$row2[prod_vendor]', '$row2[prod_ver]')";
 			
 			if(!$result = mysqli_query($db_link, $query)) {
@@ -121,5 +126,15 @@ function dbf_update_stats($db_link) {
 	}
 }
 
+function dbf_new_database($db_link) {
+	$query = "INSERT INTO statistics (last_db_update_epoch) VALUES ('".time()."')";
+	if(!$result = mysqli_query($db_link, $query)) {
+		$xml = c_initiate_xml($ini_array);
+		$xml_error = $xml->addchild('error');
+		$xml_error->addchild('code', '500');
+		$xml_error->addchild('description', 'DB Error: '.mysqli_error($db_link));
+		c_announce($xml);
+	}
+}
 
 ?>
