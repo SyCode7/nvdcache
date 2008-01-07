@@ -19,7 +19,7 @@ require 'common_functions.php';
 
 $start_time_epoch = time();
 $this_programs_version = "0.1"; // Original release
-$this_programs_name = "populateDB";
+$this_programs_name = "updateDataSource";
 $msg = "";
 global $oldest_update_epoch;
 
@@ -32,7 +32,7 @@ if (file_exists("local_config.ini")) {
 		$xml = c_initiate_xml($ini_array);
 		$xml_error = $xml->addchild('error');
 		$xml_error->addchild('code', '500');
-		$xml_error->addchild('description', 'Configuration files were not found.  Please review the README.txt file.');
+		$xml_error->addchild('description', 'Configuration files were not found.  Please see http://code.google.com/p/nvdcache/ for information.');
 		c_announce($xml);
 	}
 }
