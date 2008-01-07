@@ -1,9 +1,13 @@
-#summary One-sentence summary of this page.
+#summary Instructions for getting nvdCache to work.
 #labels Phase-Deploy
 
 = Introduction =
 
-Add your content here.
+These are the basic instructions needed to get nvdCahce up and working.
+
+= Requirements =
+
+1) Access to a MySQL database 
 
 
 = Details =
