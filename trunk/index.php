@@ -40,7 +40,7 @@ $cache_stats = dbf_cache_stats($db_link);
 
 $nvdCache_age_seconds = time() - $cache_stats[last_db_update_epoch];
 
-$msg = "Everything looks honky dory!"
+$msg = "Everything looks honky dory!";
 
 $xml = c_initiate_xml($ini_array);
 $xml_msg = $xml->addchild('status');
