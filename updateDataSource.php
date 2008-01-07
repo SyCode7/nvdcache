@@ -21,6 +21,7 @@ $this_programs_version = "0.1"; // Original release
 $this_programs_name = "updateDataSource";
 $msg = "";
 global $oldest_update_epoch;
+$oldest_update_epoch = 100000000000;
 
 // load ini file into an array	
 if (file_exists("local_config.ini")) {
@@ -74,10 +75,11 @@ $msg .= ' Took '.$run_time.' seconds to complete';
 $nvdCache_age_seconds = time() - $cache_stats[last_db_update_epoch];
 
 $xml = c_initiate_xml($ini_array);
-$xml_msg = $xml->addchild('message');
+$xml_msg = $xml->addchild('status');
 $xml_msg->addchild('code', '200');
 $xml_msg->addchild('description', $msg);
-$xml_msg->addchild('nvdCache_age_seconds', $nvdCache_age_seconds);
+$xml_msg->addchild('cache_age_seconds', $nvdCache_age_seconds);
+$xml_msg->addchild('oldest_update_item_epoch', $oldest_update_epoch);
 c_announce($xml);
 
 //
