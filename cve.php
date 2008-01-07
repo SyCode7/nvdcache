@@ -63,7 +63,7 @@ if(!$regex_status || !$cve_id) {
 // everything looks good to this point.  We will now pull together the data from the db and build an xml string to return.
 //
 
-$cve_data = dbf_getCveData($db_link, $cve_id);
+$cve_data = dbf_getCveData($db_link, $cve_id, $ini_array);
 
 echo $cve_data->asXML();
 

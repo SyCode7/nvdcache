@@ -138,7 +138,7 @@ function dbf_new_database($db_link) {
 }
 
 //
-function dbf_getCveData($db_link, $cve_id) {
+function dbf_getCveData($db_link, $cve_id, $ini_array) {
 	$query = "SELECT * FROM cve WHERE cve_name = '$cve_id'";
 	if(!$result = mysqli_query($db_link, $query)) {
 		$xml = c_initiate_xml($ini_array);
