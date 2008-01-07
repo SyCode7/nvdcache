@@ -1,9 +1,8 @@
--- Host:
--- Generation Time: Dec 16, 2007 at 04:29 AM
--- Server version: 5.0.37
--- PHP Version: 5.2.1
-
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+
+CREATE DATABASE `nvdCache`;
+
+USE `nvdCache`;
 
 -- 
 -- Database: `nvdCache`
