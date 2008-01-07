@@ -89,6 +89,11 @@ c_announce($xml);
 //
 
 function full_db_load($ini_array) {
+	
+	// 
+	// below has been implemented very poorly.  It must be re-written to just figure the currrent
+	// year and do a for each back to 2002.
+	//
 	$url = $ini_array[cve][url_base].$ini_array[cve][url_cve_year_pre]."2002".$ini_array[cve][url_cve_year_post];
 	$oldest_update_epoch = stream_load_xml($url);
 	
@@ -105,6 +110,9 @@ function full_db_load($ini_array) {
 	$oldest_update_epoch = stream_load_xml($url);
 	
 	$url = $ini_array[cve][url_base].$ini_array[cve][url_cve_year_pre]."2007".$ini_array[cve][url_cve_year_post];
+	$oldest_update_epoch = stream_load_xml($url);
+	
+	$url = $ini_array[cve][url_base].$ini_array[cve][url_cve_year_pre]."2008".$ini_array[cve][url_cve_year_post];
 	$oldest_update_epoch = stream_load_xml($url);
 	
 	$url = $ini_array[cve][url_base].$ini_array[cve][url_cve_modified];
