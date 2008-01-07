@@ -209,7 +209,7 @@ function dbf_getCveData($db_link, $cve_id) {
 	while ($row = mysqli_fetch_assoc($result)) {
 		$xml_prod = $xml_vuln_soft->addchild('prod');
 		$xml_prod['name'] = $row[prod_name];
-		$xml_prod['vendor'] = $row[prod_vondor];
+		$xml_prod['vendor'] = $row[prod_vendor];
 		$xml_prod['version'] = $row[vers_num];
 	}
 	
