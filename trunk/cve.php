@@ -29,7 +29,7 @@ if (file_exists("local_config.ini")) {
 		$xml = c_initiate_xml($ini_array);
 		$xml_error = $xml->addchild('error');
 		$xml_error->addchild('code', '500');
-		$xml_error->addchild('description', 'Configuration files were not found.  Please review the README.txt file.');
+		$xml_error->addchild('description', 'Configuration files were not found.  Please review the http://code.google.com/p/nvdcache/ file.');
 		c_announce($xml);
 	}
 }
@@ -46,7 +46,7 @@ if($ini_array[security][token_required] == 1 && $ini_array[security][access_toke
 	$xml = c_initiate_xml($ini_array);
 	$xml_error = $xml->addchild('error');
 	$xml_error->addchild('code', '500');
-	$xml_error->addchild('description', 'Invalid token or no token given.  A token is required to communicate with this system.  Please see README.txt for information.');
+	$xml_error->addchild('description', 'Invalid token or no token given.  A token is required to communicate with this system.  Please see http://code.google.com/p/nvdcache/ for information.');
 	c_announce($xml);
 }
 
