@@ -137,4 +137,83 @@ function dbf_new_database($db_link) {
 	}
 }
 
+//
+function dbf_getCveData($db_link, $cve_id) {
+	$query = "SELECT * FROM cve WHERE cve_name = '$cve_id'";
+	if(!$result = mysqli_query($db_link, $query)) {
+		$xml = c_initiate_xml($ini_array);
+		$xml_error = $xml->addchild('error');
+		$xml_error->addchild('code', '500');
+		$xml_error->addchild('description', 'DB Error: '.mysqli_error($db_link));
+		c_announce($xml);
+	}
+	
+	// start building the xml data string
+	$xml = c_initiate_xml($ini_array);
+	$xml_entry = $xml->addchild('entry');
+	$xml_entry['type'] = "CVE"; 
+	
+	while ($row = mysqli_fetch_assoc($result)) {
+		$xml_entry['name'] = $row[cve_name];
+		$xml_entry['published'] = date('Y-m-d', $row[published_epoch]);
+		$xml_entry['modified'] = date('Y-m-d', $row[modified_epoch]);
+		$xml_entry['severity'] = $row[severity];
+		$xml_entry['CVSS_score'] = $row[CVSS_score];
+		$xml_entry['CVSS_vector'] = $row[CVSS_vector];
+		$xml_entry['CVSS_version'] = $row[CVSS_version];
+		$xml_entry['CVSS_base_score'] = $row[CVSS_base_score];
+		$xml_entry['CVSS_impact_subscore'] = $row[CVSS_impact_subscore];
+		$xml_entry['CVSS_exploit_subscore'] = $row[CVSS_exploit_subscore];
+		
+		$xml_desc = $xml_entry->addchild('desc');
+		
+		$xml_descript = $xml_desc->addchild('descript', $row[description]);
+		
+		$xml_descript['source'] = "CVE";
+	}
+	
+	//get any refrences
+	
+	$query = "SELECT * FROM cve_ref WHERE cve_name = '$cve_id'";
+	if(!$result = mysqli_query($db_link, $query)) {
+		$xml = c_initiate_xml($ini_array);
+		$xml_error = $xml->addchild('error');
+		$xml_error->addchild('code', '500');
+		$xml_error->addchild('description', 'DB Error: '.mysqli_error($db_link));
+		c_announce($xml);
+	}
+	
+	$xml_refs = $xml_entry->addchild('refs');
+	
+	while ($row = mysqli_fetch_assoc($result)) {
+		$xml_ref = $xml_refs->addchild('ref', $row[ref_text]);
+		$xml_ref['source'] = $row[ref_source];
+		$xml_ref['url'] = $row[ref_url];
+		$xml_ref['patch'] = $row[ref_patch];
+	}
+	
+	
+	// get the product data
+	
+	$query = "SELECT * FROM cve_prod WHERE cve_name = '$cve_id'";
+	if(!$result = mysqli_query($db_link, $query)) {
+		$xml = c_initiate_xml($ini_array);
+		$xml_error = $xml->addchild('error');
+		$xml_error->addchild('code', '500');
+		$xml_error->addchild('description', 'DB Error: '.mysqli_error($db_link));
+		c_announce($xml);
+	}
+	
+	$xml_vuln_soft = $xml_entry->addchild('vuln_soft');
+	
+	while ($row = mysqli_fetch_assoc($result)) {
+		$xml_prod = $xml_vuln_soft->addchild('prod');
+		$xml_prod['name'] = $row[prod_name];
+		$xml_prod['vendor'] = $row[prod_vondor];
+		$xml_prod['version'] = $row[vers_num];
+	}
+	
+	return $xml;
+}
+
 ?>

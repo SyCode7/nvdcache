@@ -59,4 +59,12 @@ if(!$regex_status || !$cve_id) {
 	c_announce($xml);
 }
 
+//
+// everything looks good to this point.  We will now pull together the data from the db and build an xml string to return.
+//
+
+$cve_data = dbf_getCveData($db_link, $cve_id);
+
+echo $xml->asXML();
+
 ?>

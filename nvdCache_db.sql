@@ -45,7 +45,7 @@ CREATE TABLE `cve_prod` (
   `vers_edition` varchar(128) NOT NULL,
   PRIMARY KEY  (`cve_prod_id`),
   KEY `cve_name` (`cve_name`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=539899 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -62,7 +62,7 @@ CREATE TABLE `cve_ref` (
   `ref_text` text NOT NULL,
   PRIMARY KEY  (`cve_ref_id`),
   KEY `cve_name` (`cve_name`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=498885 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -74,4 +74,7 @@ CREATE TABLE `statistics` (
   `stat_id` int(12) NOT NULL auto_increment,
   `last_db_update_epoch` int(10) NOT NULL,
   PRIMARY KEY  (`stat_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+INSERT INTO `statistics` (`stat_id`, `last_db_update_epoch`) VALUES
+(1, 0);
