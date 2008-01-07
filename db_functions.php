@@ -14,6 +14,7 @@ PURPOSE.
 */
 
 function dbf_connectDB($ini_array) {
+	if
 	$db_link = mysqli_connect($ini_array[database][host], $ini_array[database][user], $ini_array[database][password], $ini_array[database][db_name], $ini_array[database][port], $ini_array[database][socket]);
 	if(!$db_link) {
 		$xml = c_initiate_xml($ini_array);
