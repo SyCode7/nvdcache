@@ -42,7 +42,7 @@ $db_link = dbf_connectDB($ini_array);
 // grab the cache stats from the table.  This will tell us the last time the db was updated (if at all)
 $cache_stats = dbf_cache_stats($db_link);
 
-if(!$cache_stats) { // new install or empty statistics table
+if($cache_stats[last_db_update_epoch] == 1000000) { // new install or empty statistics table
 	$msg .= "The statistics table is empty.  Maybe a new install.  A full load will be initiated.";
 	full_db_load($ini_array);
 	dbf_update_stats($db_link);
