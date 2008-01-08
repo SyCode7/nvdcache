@@ -77,4 +77,4 @@ CREATE TABLE `statistics` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 INSERT INTO `statistics` (`stat_id`, `last_db_update_epoch`) VALUES
-(1, 0);
+(1, 1000000);
