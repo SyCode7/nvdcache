@@ -55,8 +55,8 @@ $xml_msg = $xml->addchild('status');
 $xml_msg->addchild('code', '200');
 $xml_msg->addchild('description', $msg);
 $xml_msg->addchild('cache_age_seconds', $nvdCache_age_seconds);
+$xml_msg->addchild('seconds_to_make_con', $seconds_to_make_con);
 $xml_msg->addchild('seconds_to_make_query', $seconds_to_make_query);
-$xml_msg->addchild('cache_age_seconds', $seconds_to_make_con);
 c_announce($xml);
 
 ?>
