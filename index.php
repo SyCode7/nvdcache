@@ -34,9 +34,17 @@ if (file_exists("local_config.ini")) {
 	}
 }
 
+$start_db_con_call = time();
 $db_link = dbf_connectDB($ini_array);
+$end_db_con_call = time();
 
+$seconds_to_make_con = $end_db_con_call - $start_db_con_call;
+
+$start_db_query_call = time();
 $cache_stats = dbf_cache_stats($db_link);
+$end_db_query_call = time();
+
+$seconds_to_make_query = $end_db_query_call - $start_db_query_call;
 
 $nvdCache_age_seconds = time() - $cache_stats[last_db_update_epoch];
 
@@ -47,6 +55,8 @@ $xml_msg = $xml->addchild('status');
 $xml_msg->addchild('code', '200');
 $xml_msg->addchild('description', $msg);
 $xml_msg->addchild('cache_age_seconds', $nvdCache_age_seconds);
+$xml_msg->addchild('seconds_to_make_query', $seconds_to_make_query);
+$xml_msg->addchild('cache_age_seconds', $seconds_to_make_con);
 c_announce($xml);
 
 ?>
