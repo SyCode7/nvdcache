@@ -65,6 +65,6 @@ if(!$regex_status || !$cve_id) {
 
 $cve_data = dbf_getCveData($db_link, $cve_id, $ini_array);
 
-echo $cve_data->asXML();
+c_announce($cve_data);
 
 ?>
