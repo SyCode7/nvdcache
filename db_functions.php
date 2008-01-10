@@ -178,6 +178,8 @@ function dbf_getCveData($db_link, $cve_id, $ini_array) {
 		
 		$xml_descript = $xml_desc->addchild('descript', $row[description]);
 		
+		echo $row[description]."\n";
+		
 		$xml_descript['source'] = "CVE";
 	}
 	
