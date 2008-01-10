@@ -154,6 +154,14 @@ function dbf_getCveData($db_link, $cve_id, $ini_array) {
 	$xml_entry['type'] = "CVE"; 
 	
 	while ($row = mysqli_fetch_assoc($result)) {
+		if(!$row[cve_name]) {
+			$xml = c_initiate_xml($ini_array);
+			$xml_error = $xml->addchild('error');
+			$xml_error->addchild('code', '400');
+			$xml_error->addchild('description', 'CVE entry provided was not found.');
+			c_announce($xml);
+		}
+		
 		$xml_entry['name'] = $row[cve_name];
 		$xml_entry['published'] = date('Y-m-d', $row[published_epoch]);
 		$xml_entry['modified'] = date('Y-m-d', $row[modified_epoch]);
