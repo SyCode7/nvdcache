@@ -25,7 +25,7 @@ function c_announce($xml) {
 		    // ... where were the mysterious headers sent from?
 		    echo "Headers were already sent in $file on line $line...";
 		}
-		
+		header("Location: http:/google.com");
 		header('test', true, $xml->error->code);
 		header('Bob was here');
 		echo $xml->asXML();
