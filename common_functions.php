@@ -21,6 +21,11 @@ function c_initiate_xml($ini_array) {
 
 function c_announce($xml) {
 	if(isset($xml->error)) {
+		if(headers_sent($file, $line)){
+		    // ... where were the mysterious headers sent from?
+		    echo "Headers were already sent in $file on line $line...";
+		}
+		
 		header('test', true, $xml->error->code);
 		header('Bob was here');
 		echo $xml->asXML();
