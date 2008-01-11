@@ -21,6 +21,7 @@ function c_initiate_xml($ini_array) {
 
 function c_announce($xml) {
 	if(isset($xml->error)) {
+		echo "bob";
 		header('test', true, $xml->error->code);
 		echo $xml->asXML();
 		exit(1);
