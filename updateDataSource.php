@@ -47,7 +47,7 @@ if($cache_stats[last_db_update_epoch] == 1000000) { // new install or empty stat
 	full_db_load($ini_array);
 	dbf_update_stats($db_link);
 	$cache_stats = dbf_cache_stats($db_link);
-	dbf_new_database($db_link);
+	//dbf_new_database($db_link);
 }
 
 $seconds_since_last_update = time() - $cache_stats[last_db_update_epoch];
