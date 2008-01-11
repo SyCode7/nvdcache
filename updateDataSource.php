@@ -222,7 +222,7 @@ function xml_end_element($parser, $name) {
 function xml_character_data($parser, $data) {
 	global $cve, $ref_count, $prod_count;
 	if($cve[in_desc]) {
-		$cve[description] = $data;
+		$cve[description] .= $data;
 	}
 	
 	if($cve[in_ref]) {

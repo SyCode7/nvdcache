@@ -44,9 +44,7 @@ function dbf_cache_stats($db_link) {
 function dbf_put_cve_in_db($cve, $db_link) {
 	// if it exists teplace the current cve
 	$description_escaped = mysqli_real_escape_string($db_link, $cve[description]);
-	$query = "REPLACE INTO cve SET cve_name = '$cve[cve_name]', reject = '$cve[reject]', published_epoch = '$cve[published_epoch]', modified_epoch = '$cve[modified_epoch]', last_cache_update_epoch = '$cve[last_cache_update_epoch]', severity = '$cve[severity]', CVSS_score = '$cve[CVSS_score]', CVSS_vector = '$cve[CVSS_vector]', CVSS_version = '$cve[CVSS_version]', CVSS_base_score = '$cve[CVSS_base_score]', CVSS_impact_subscore = '$cve[CVSS_impact_subscore]', CVSS_exploit_subscore = '$cve[CVSS_exploit_subscore]', description = '$cve[description]'";
-	
-	echo $query."\n";
+	$query = "REPLACE INTO cve SET cve_name = '$cve[cve_name]', reject = '$cve[reject]', published_epoch = '$cve[published_epoch]', modified_epoch = '$cve[modified_epoch]', last_cache_update_epoch = '$cve[last_cache_update_epoch]', severity = '$cve[severity]', CVSS_score = '$cve[CVSS_score]', CVSS_vector = '$cve[CVSS_vector]', CVSS_version = '$cve[CVSS_version]', CVSS_base_score = '$cve[CVSS_base_score]', CVSS_impact_subscore = '$cve[CVSS_impact_subscore]', CVSS_exploit_subscore = '$cve[CVSS_exploit_subscore]', description = '$description_escaped'";
 	
 	if(!$result = mysqli_query($db_link, $query)) {
 		$xml = c_initiate_xml($ini_array);
