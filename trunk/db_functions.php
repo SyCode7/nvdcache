@@ -76,7 +76,7 @@ function dbf_update_stats($db_link) {
 
 //
 function dbf_getEntryData($db_link, $entryName, $entryType, $ini_array) {
-	$query = "SELECT 1 FROM nvdEntry WHERE type = '$entryType' AND name = '$entryName'";
+	$query = "SELECT * FROM nvdEntry WHERE type = '$entryType' AND name = '$entryName'";
 	if(!$result = mysqli_query($db_link, $query)) {
 		$xml = c_initiate_xml($ini_array);
 		$xml_error = $xml->addchild('error');
