@@ -48,8 +48,8 @@ function dbf_cache_stats($db_link) {
 function dbf_put_entry_in_db($entry, $db_link) {
 	// make sql safe the text
 	$entry_mysql_safe = mysqli_real_escape_string($db_link, $entry);
-	echo $entry."\n";
-	echo $entry_mysql_safe."\n";
+	//echo $entry."\n";
+	//echo $entry_mysql_safe."\n";
 	
 	$xml_entry = new SimpleXMLElement($entry);
 	
