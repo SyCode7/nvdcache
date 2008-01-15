@@ -39,9 +39,8 @@ function dbf_cache_stats($db_link) {
 	$cache_stats =  mysqli_fetch_assoc($result);
 	
 	$cache_stats[seconds_since_last_update] = time() - $cache_stats[last_db_update_epoch];
-	echo $cache_stats[seconds_since_last_update];
-	$cache_stats[minutes_since_last_update] = $seconds_since_last_update/60;
-	$cache_stats[hours_since_last_update] = $minutes_since_last_update/60;
+	$cache_stats[minutes_since_last_update] = $cache_stats[seconds_since_last_update]/60;
+	$cache_stats[hours_since_last_update] = $cache_stats[minutes_since_last_update]/60;
 	
 	return $cache_stats;
 }
