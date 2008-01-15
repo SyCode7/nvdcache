@@ -108,7 +108,7 @@ function dbf_getEntryData($db_link, $entryName, $entryType, $ini_array) {
 	
 	$xml = new SimpleXMLElement($xml_result);
 	
-	return $xml;
+	return $xml_result;
 	
 }
 
