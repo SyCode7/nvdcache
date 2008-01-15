@@ -102,7 +102,7 @@ function dbf_getEntryData($db_link, $entryName, $entryType, $ini_array) {
 	while ($row = mysqli_fetch_assoc($result)) {
 		$xml_result = $xml_parent_start;
 		$xml_result .= $row[entry];
-		echo $row[entry]."\n";
+		echo $row[entry]."\n bob was here \n";
 		$xml_result .= $xml_parent_end;
 	}
 	
