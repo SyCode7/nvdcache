@@ -102,13 +102,12 @@ function dbf_getEntryData($db_link, $entryName, $entryType, $ini_array) {
 	while ($row = mysqli_fetch_assoc($result)) {
 		$xml_result = $xml_parent_start;
 		$xml_result .= $row[entry];
-		echo $row[entry]."\n bob was here \n";
 		$xml_result .= $xml_parent_end;
 	}
 	
 	$xml = new SimpleXMLElement($xml_result);
 	
-	return $xml_result;
+	return $xml;
 	
 }
 
