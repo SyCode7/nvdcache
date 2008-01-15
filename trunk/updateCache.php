@@ -60,9 +60,6 @@ $run_time = time() - $start_time_epoch;
 $msg .= ' Took '.$run_time.' seconds to complete';
 $nvdCache_age_seconds = time() - $cache_stats[last_db_update_epoch];
 
-echo $cache_stats[hours_since_last_update]."\n";
-echo $cache_stats[minutes_since_last_update]."\n";
-
 $xml = c_initiate_xml($ini_array);
 $xml_msg = $xml->addchild('status');
 $xml_msg->addchild('code', '200');

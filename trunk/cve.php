@@ -17,7 +17,8 @@ require 'db_functions.php';
 require 'common_functions.php';
 
 $start_time_epoch = time();
-$this_programs_version = "0.1"; // Original release
+//$this_programs_version = "0.1"; // Original release
+$this_programs_version = "0.2"; // Updated with better pull of the xml data.
 $this_programs_name = "cve";
 
 // load ini file into an array	
@@ -38,7 +39,7 @@ $db_link = dbf_connectDB($ini_array);
 
 $cache_stats = dbf_cache_stats($db_link);
 
-$cve_id = mysqli_real_escape_string($db_link, $_REQUEST['cve_id']);
+$cve_id = $_REQUEST['cve_id'];
 $token = $_REQUEST['token'];
 
 if($ini_array[security][token_required] == 1 && $ini_array[security][access_token] != $token) {
@@ -63,8 +64,8 @@ if(!$regex_status || !$cve_id) {
 // everything looks good to this point.  We will now pull together the data from the db and build an xml string to return.
 //
 
-$cve_data = dbf_getCveData($db_link, $cve_id, $ini_array);
+$xml_cve = dbf_getEntryData($db_link, strtoupper($cve_id), 'CVE', $ini_array);
 
-c_announce($cve_data);
+c_announce($xml_cve);
 
 ?>
