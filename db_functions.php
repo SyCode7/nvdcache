@@ -96,7 +96,7 @@ function dbf_getEntryData($db_link, $entryName, $entryType, $ini_array) {
 	}
 	
 	// start building the xml data string
-	$xml_parent_start = '<nvdCache version="'.$ini_array[nvdCache][version].'" cachHost="'.$ini_array[nvdCache][cacheHost].'">';
+	$xml_parent_start = '<nvdCache version="'.$ini_array[nvdCache][version].'" cacheHost="'.$ini_array[nvdCache][cacheHost].'">';
 	$xml_parent_end = '</nvdCache>';
 	
 	while ($row = mysqli_fetch_assoc($result)) {
