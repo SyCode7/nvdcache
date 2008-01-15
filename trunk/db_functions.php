@@ -91,7 +91,7 @@ function dbf_getEntryData($db_link, $entryName, $entryType, $ini_array) {
 		$xml = c_initiate_xml($ini_array);
 		$xml_error = $xml->addchild('error');
 		$xml_error->addchild('code', '400');
-		$xml_error->addchild('description', $entryType.' entry provided was not found.');
+		$xml_error->addchild('description', $entryType.' entry '.$entryName.' was not found.');
 		c_announce($xml);
 	}
 	
