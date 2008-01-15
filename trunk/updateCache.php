@@ -49,7 +49,6 @@ if($cache_stats[last_db_update_epoch] == 1000000) { // new install
 	$url = $ini_array[cve][url_base].$ini_array[cve][url_cve_modified];
 	stream_load_xml($url, $db_link);
 	dbf_update_stats($db_link);
-	$msg .= 'Due for a modified update.';
 } else {
 	// nothing for now.
 }
@@ -60,6 +59,8 @@ $run_time = time() - $start_time_epoch;
 
 $msg .= ' Took '.$run_time.' seconds to complete';
 $nvdCache_age_seconds = time() - $cache_stats[last_db_update_epoch];
+
+echo $cache_stats[hours_since_last_update]."\n";
 
 $xml = c_initiate_xml($ini_array);
 $xml_msg = $xml->addchild('status');
@@ -106,15 +107,14 @@ function stream_load_xml($url, $db_link) {
 	$end_delimiter = "</entry>";
 	$byte_chunk_size = 64;
 	
-	
 	$handle = fopen("$url", "r");
-	/*if(!$handle) {
+	if(!$handle) {
 		$xml = c_initiate_xml($ini_array);
 		$xml_error = $xml->addchild('error');
 		$xml_error->addchild('code', '500');
 		$xml_error->addchild('description', 'Could not establish a read handle to '.$url);
 		c_announce($xml);
-	} */
+	}
 
 	$in_entry = 0;
 
