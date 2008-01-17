@@ -51,7 +51,7 @@ if($ini_array[security][token_required] == 1 && $ini_array[security][access_toke
 	c_announce($xml);
 }
 
-$regex_status = eregi("^cve-+[0-9]{4}-+[0-9]{4}", $cve_id);
+$regex_status = eregi("^cve-[0-9]{4}-[0-9]{4}", $cve_id);
 if(!$regex_status || !$cve_id) {
 	$xml = c_initiate_xml($ini_array);
 	$xml_error = $xml->addchild('error');
