@@ -101,7 +101,7 @@ function full_db_load($ini_array, $db_link) {
 }
 
 function stream_load_xml($url, $db_link) {
-	$start_delimiter = "<entry type=";
+	$start_delimiter = "<entry ";
 	$end_delimiter = "</entry>";
 	$byte_chunk_size = 64;
 	
@@ -155,8 +155,8 @@ function stream_load_xml($url, $db_link) {
 			$xml_entry_as_string = $poo.$end_delimiter;
 			
 			// put it into the db.
-			echo $xml_entry_as_string;
-			//dbf_put_entry_in_db($xml_entry_as_string, $db_link);
+			//echo $xml_entry_as_string;
+			dbf_put_entry_in_db($xml_entry_as_string, $db_link);
 			
 			//$xml = new SimpleXMLElement($xml_entry_as_string);
 			//echo $xml->asXML();
