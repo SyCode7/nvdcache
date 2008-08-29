@@ -14,7 +14,7 @@ PURPOSE.
 */
 
 function c_initiate_xml($ini_array) {
-	$xml_string = '<?xml version="1.0" encoding="ISO-8859-1"?><nvdCache version="'.$ini_array[nvdCache][version].'" cacheHost="'.$ini_array[nvdCache][cacheHost].'"></nvdCache>';
+	$xml_string = '<nvdCache version="'.$ini_array[nvdCache][version].'" cacheHost="'.$ini_array[nvdCache][cacheHost].'"></nvdCache>';
 	$xml = new SimpleXMLElement($xml_string);
 	return $xml;
 }
