@@ -51,6 +51,9 @@ if($cache_stats[last_db_update_epoch] == 1000000) { // new install
 	dbf_update_stats($db_link);
 } else {
 	// nothing for now.
+	$url = $ini_array[cve][url_base].$ini_array[cve][url_cve_modified];
+	stream_load_xml($url, $db_link);
+	dbf_update_stats($db_link);
 }
 
 mysqli_close($db_link);
