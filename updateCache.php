@@ -155,10 +155,11 @@ function stream_load_xml($url, $db_link) {
 			$xml_entry_as_string = $poo.$end_delimiter;
 			
 			// put it into the db.
+			echo $xml_entry_as_string;
 			//dbf_put_entry_in_db($xml_entry_as_string, $db_link);
 			
-			$xml = new SimpleXMLElement($xml_entry_as_string);
-			echo $xml->asXML();
+			//$xml = new SimpleXMLElement($xml_entry_as_string);
+			//echo $xml->asXML();
 			
 			// reset the read_data variable
 			
