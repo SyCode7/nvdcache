@@ -51,9 +51,6 @@ if($cache_stats[last_db_update_epoch] == 1000000) { // new install
 	dbf_update_stats($db_link);
 } else {
 	// nothing for now.
-	full_db_load($ini_array, $db_link);
-	dbf_update_stats($db_link);
-	$cache_stats = dbf_cache_stats($db_link);
 }
 
 mysqli_close($db_link);
