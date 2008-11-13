@@ -110,7 +110,7 @@ function stream_load_xml($url, $db_link, $config_cve) {
 		
 		$context = stream_context_create($opts);
 		
-		$handle = fopen("$url", "r", $context);
+		$handle = fopen("$url", "r", false, $context);
 	}else {
 		$handle = fopen("$url", "r");
 	}
