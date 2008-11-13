@@ -32,7 +32,10 @@ $config_sec[token_required] = "0"; //will the program calling this cache be requ
 $config_sec[access_token] = ""; //you would put the token data in this filed.
 
 // cve repository information
-$config_cve[url_base] = "http://nvd.nist.gov/download/";
+$config_cve[proxy_url] = "";
+$config_cve[proxy_port] = "";
+$config_cve[protocol] = "http://";
+$config_cve[url_base] = "nvd.nist.gov/download/";
 $config_cve[url_cve_modified] = "nvdcve-modified.xml";
 $config_cve[url_cve_recent] = "nvdcve-recent.xml";
 $config_cve[url_cve_year_pre] = "nvdcve-";

@@ -68,28 +68,36 @@ function full_db_load($config_cve, $db_link) {
 	// below has been implemented very poorly.  It must be re-written to just figure the currrent
 	// year and do a for each back to 2002.
 	//
-	$url = $config_cve[url_base].$config_cve[url_cve_year_pre]."2002".$config_cve[url_cve_year_post];
+	
+	if ($config_cve[proxy_url] && $config_cve[proxy_port]){
+		$url_start = $config_cve[protocol].$config_cve[proxy_url].":".$config_cve[proxy_port]."/";
+	} else
+	{
+		$url_start = $config_cve[protocol];
+	}
+	
+	$url = $url_start.$config_cve[url_base].$config_cve[url_cve_year_pre]."2002".$config_cve[url_cve_year_post];
 	stream_load_xml($url, $db_link);
 	
-	$url = $config_cve[url_base].$config_cve[url_cve_year_pre]."2003".$config_cve[url_cve_year_post];
+	$url = $url_start.$config_cve[url_base].$config_cve[url_cve_year_pre]."2003".$config_cve[url_cve_year_post];
 	stream_load_xml($url, $db_link);
 	
-	$url = $config_cve[url_base].$config_cve[url_cve_year_pre]."2004".$config_cve[url_cve_year_post];
+	$url = $url_start.$config_cve[url_base].$config_cve[url_cve_year_pre]."2004".$config_cve[url_cve_year_post];
 	stream_load_xml($url, $db_link);
 	
-	$url = $config_cve[url_base].$config_cve[url_cve_year_pre]."2005".$config_cve[url_cve_year_post];
+	$url = $url_start.$config_cve[url_base].$config_cve[url_cve_year_pre]."2005".$config_cve[url_cve_year_post];
 	stream_load_xml($url, $db_link);
 	
-	$url = $config_cve[url_base].$config_cve[url_cve_year_pre]."2006".$config_cve[url_cve_year_post];
+	$url = $url_start.$config_cve[url_base].$config_cve[url_cve_year_pre]."2006".$config_cve[url_cve_year_post];
 	stream_load_xml($url, $db_link);
 	
-	$url = $config_cve[url_base].$config_cve[url_cve_year_pre]."2007".$config_cve[url_cve_year_post];
+	$url = $url_start.$config_cve[url_base].$config_cve[url_cve_year_pre]."2007".$config_cve[url_cve_year_post];
 	stream_load_xml($url, $db_link);
 	
-	$url = $config_cve[url_base].$config_cve[url_cve_year_pre]."2008".$config_cve[url_cve_year_post];
+	$url = $url_start.$config_cve[url_base].$config_cve[url_cve_year_pre]."2008".$config_cve[url_cve_year_post];
 	stream_load_xml($url, $db_link);
 	
-	$url = $config_cve[url_base].$config_cve[url_cve_modified];
+	$url = $url_start.$config_cve[url_base].$config_cve[url_cve_modified];
 	stream_load_xml($url, $db_link);
 }
 
