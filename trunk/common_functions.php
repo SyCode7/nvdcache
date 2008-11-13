@@ -13,7 +13,7 @@ PURPOSE.
 
 */
 
-function c_initiate_xml($ini_array) {
+function c_initiate_xml($config_nvdcache) {
 	$xml_string = '<nvdCache version="'.$config_nvdcache[version].'" cacheHost="'.$config_nvdcache[cacheHost].'"></nvdCache>';
 	$xml = new SimpleXMLElement($xml_string);
 	return $xml;
