@@ -36,7 +36,7 @@ $token = $_REQUEST['token'];
 
 if($ini_array[security][token_required] == 1 && $ini_array[security][access_token] != $token) {
 	// this is very rude unsafe security.
-	$xml = c_initiate_xml($ini_array);
+	$xml = c_initiate_xml($config_nvdcache);
 	$xml_error = $xml->addchild('error');
 	$xml_error->addchild('code', '500');
 	$xml_error->addchild('description', 'Invalid token or no token given.  A token is required to communicate with this system.  Please see http://code.google.com/p/nvdcache/ for information.');
@@ -45,7 +45,7 @@ if($ini_array[security][token_required] == 1 && $ini_array[security][access_toke
 
 $regex_status = eregi("^cve-[0-9]{4}-[0-9]{4}$", $cve_id);
 if(!$regex_status || !$cve_id) {
-	$xml = c_initiate_xml($ini_array);
+	$xml = c_initiate_xml($config_nvdcache);
 	$xml_error = $xml->addchild('error');
 	$xml_error->addchild('code', '400');
 	$xml_error->addchild('description', 'Bad Request.  A CVE name was not given or was malformed.  Looking for this format - CVE-XXXX-XXXX');

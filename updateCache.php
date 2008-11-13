@@ -39,7 +39,7 @@ if($cache_stats[last_db_update_epoch] == 1000000) { // new install
 	$cache_stats = dbf_cache_stats($db_link);
 } elseif($cache_stats[hours_since_last_update] > $config_nvdcache[update_freq_hours]) { // she hasn't been updated in the time frame
 	// go and get the modifed file from nvd and run it through the db
-	$url = $ini_array[cve][url_base].$ini_array[cve][url_cve_modified];
+	$url = $config_cve[url_base].$config_cve[url_cve_modified];
 	stream_load_xml($url, $db_link);
 	dbf_update_stats($db_link);
 } else {
@@ -53,7 +53,7 @@ $run_time = time() - $start_time_epoch;
 $msg .= ' Took '.$run_time.' seconds to complete';
 $nvdCache_age_seconds = time() - $cache_stats[last_db_update_epoch];
 
-$xml = c_initiate_xml($ini_array);
+$xml = c_initiate_xml($config_nvdcache);
 $xml_msg = $xml->addchild('status');
 $xml_msg->addchild('code', '200');
 $xml_msg->addchild('description', $msg);
@@ -68,28 +68,28 @@ function full_db_load($ini_array, $db_link) {
 	// below has been implemented very poorly.  It must be re-written to just figure the currrent
 	// year and do a for each back to 2002.
 	//
-	$url = $ini_array[cve][url_base].$ini_array[cve][url_cve_year_pre]."2002".$ini_array[cve][url_cve_year_post];
+	$url = $config_cve[url_base].$config_cve[url_cve_year_pre]."2002".$config_cve[url_cve_year_post];
 	stream_load_xml($url, $db_link);
 	
-	$url = $ini_array[cve][url_base].$ini_array[cve][url_cve_year_pre]."2003".$ini_array[cve][url_cve_year_post];
+	$url = $config_cve[url_base].$config_cve[url_cve_year_pre]."2003".$config_cve[url_cve_year_post];
 	stream_load_xml($url, $db_link);
 	
-	$url = $ini_array[cve][url_base].$ini_array[cve][url_cve_year_pre]."2004".$ini_array[cve][url_cve_year_post];
+	$url = $config_cve[url_base].$config_cve[url_cve_year_pre]."2004".$config_cve[url_cve_year_post];
 	stream_load_xml($url, $db_link);
 	
-	$url = $ini_array[cve][url_base].$ini_array[cve][url_cve_year_pre]."2005".$ini_array[cve][url_cve_year_post];
+	$url = $config_cve[url_base].$config_cve[url_cve_year_pre]."2005".$config_cve[url_cve_year_post];
 	stream_load_xml($url, $db_link);
 	
-	$url = $ini_array[cve][url_base].$ini_array[cve][url_cve_year_pre]."2006".$ini_array[cve][url_cve_year_post];
+	$url = $config_cve[url_base].$config_cve[url_cve_year_pre]."2006".$config_cve[url_cve_year_post];
 	stream_load_xml($url, $db_link);
 	
-	$url = $ini_array[cve][url_base].$ini_array[cve][url_cve_year_pre]."2007".$ini_array[cve][url_cve_year_post];
+	$url = $config_cve[url_base].$config_cve[url_cve_year_pre]."2007".$config_cve[url_cve_year_post];
 	stream_load_xml($url, $db_link);
 	
-	$url = $ini_array[cve][url_base].$ini_array[cve][url_cve_year_pre]."2008".$ini_array[cve][url_cve_year_post];
+	$url = $config_cve[url_base].$config_cve[url_cve_year_pre]."2008".$config_cve[url_cve_year_post];
 	stream_load_xml($url, $db_link);
 	
-	$url = $ini_array[cve][url_base].$ini_array[cve][url_cve_modified];
+	$url = $config_cve[url_base].$config_cve[url_cve_modified];
 	stream_load_xml($url, $db_link);
 }
 
@@ -100,7 +100,7 @@ function stream_load_xml($url, $db_link) {
 	
 	$handle = fopen("$url", "r");
 	if(!$handle) {
-		$xml = c_initiate_xml($ini_array);
+		$xml = c_initiate_xml($config_nvdcache);
 		$xml_error = $xml->addchild('error');
 		$xml_error->addchild('code', '500');
 		$xml_error->addchild('description', 'Could not establish a read handle to '.$url);

@@ -16,7 +16,7 @@ PURPOSE.
 function dbf_connectDB($config_database) {
 	$db_link = mysqli_connect($config_database[host], $config_database[user], $config_database[password], $config_database[db_name], $config_database[port], $config_database[socket]);
 	if(!$db_link) {
-		$xml = c_initiate_xml($ini_array);
+		$xml = c_initiate_xml($config_nvdcache);
 		$xml_error = $xml->addchild('error');
 		$xml_error->addchild('code', '500');
 		$xml_error->addchild('description', 'DB Error trying to connect.');
@@ -56,7 +56,7 @@ function dbf_put_entry_in_db($entry, $db_link) {
 	$query = "REPLACE INTO nvdData SET name = '$xml_entry[name]', type = '$xml_entry[type]', entry = '$entry_mysql_safe'";
 	
 	if(!$result = mysqli_query($db_link, $query)) {
-		$xml = c_initiate_xml($ini_array);
+		$xml = c_initiate_xml($config_nvdcache);
 		$xml_error = $xml->addchild('error');
 		$xml_error->addchild('code', '500');
 		$xml_error->addchild('description', 'DB Error: '.mysqli_error($db_link));
@@ -68,7 +68,7 @@ function dbf_update_stats($db_link) {
 	$query = "UPDATE statistics SET last_db_update_epoch = '".time()."' WHERE stat_id = '1'";
 	
 	if(!$result = mysqli_query($db_link, $query)) {
-		$xml = c_initiate_xml($ini_array);
+		$xml = c_initiate_xml($config_nvdcache);
 		$xml_error = $xml->addchild('error');
 		$xml_error->addchild('code', '500');
 		$xml_error->addchild('description', 'DB Error: '.mysqli_error($db_link));
@@ -80,7 +80,7 @@ function dbf_update_stats($db_link) {
 function dbf_getEntryData($db_link, $entryName, $entryType, $ini_array) {
 	$query = "SELECT * FROM nvdData WHERE type = '$entryType' AND name = '$entryName'";
 	if(!$result = mysqli_query($db_link, $query)) {
-		$xml = c_initiate_xml($ini_array);
+		$xml = c_initiate_xml($config_nvdcache);
 		$xml_error = $xml->addchild('error');
 		$xml_error->addchild('code', '500');
 		$xml_error->addchild('description', 'DB Error: '.mysqli_error($db_link));
@@ -88,7 +88,7 @@ function dbf_getEntryData($db_link, $entryName, $entryType, $ini_array) {
 	}
 
 	if(mysqli_num_rows($result) == 0) {
-		$xml = c_initiate_xml($ini_array);
+		$xml = c_initiate_xml($config_nvdcache);
 		$xml_error = $xml->addchild('error');
 		$xml_error->addchild('code', '400');
 		$xml_error->addchild('description', $entryType.' entry '.$entryName.' was not found.');
