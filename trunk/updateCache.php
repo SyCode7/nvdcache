@@ -34,7 +34,7 @@ $cache_stats = dbf_cache_stats($db_link);
 
 if($cache_stats[last_db_update_epoch] == 1000000) { // new install
 	// get all data from nvd and load it up.
-	full_db_load($ini_array, $db_link);
+	full_db_load($config_cve, $db_link);
 	dbf_update_stats($db_link);
 	$cache_stats = dbf_cache_stats($db_link);
 } elseif($cache_stats[hours_since_last_update] > $config_nvdcache[update_freq_hours]) { // she hasn't been updated in the time frame
