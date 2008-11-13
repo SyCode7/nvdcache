@@ -43,7 +43,7 @@ $seconds_to_make_query = $end_db_query_call - $start_db_query_call;
 $nvdCache_age_seconds = time() - $cache_stats[last_db_update_epoch];
 
 //  Build the response
-$xml = c_initiate_xml($ini_array);
+$xml = c_initiate_xml($config_nvdcache);
 $xml_msg = $xml->addchild('status');
 $xml_msg->addchild('code', '200');
 $xml_msg->addchild('cache_age_seconds', $nvdCache_age_seconds);
