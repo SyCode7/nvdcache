@@ -13,7 +13,7 @@ PURPOSE.
 
 */
 
-function dbf_connectDB($database) {
+function dbf_connectDB($config_database) {
 	$db_link = mysqli_connect($ini_array[database][host], $ini_array[database][user], $ini_array[database][password], $ini_array[database][db_name], $ini_array[database][port], $ini_array[database][socket]);
 	if(!$db_link) {
 		$xml = c_initiate_xml($ini_array);
@@ -53,7 +53,7 @@ function dbf_put_entry_in_db($entry, $db_link) {
 	
 	$xml_entry = new SimpleXMLElement($entry);
 	
-	$query = "REPLACE INTO nvdEntry SET name = '$xml_entry[name]', type = '$xml_entry[type]', entry = '$entry_mysql_safe'";
+	$query = "REPLACE INTO nvdData SET name = '$xml_entry[name]', type = '$xml_entry[type]', entry = '$entry_mysql_safe'";
 	
 	if(!$result = mysqli_query($db_link, $query)) {
 		$xml = c_initiate_xml($ini_array);
@@ -78,7 +78,7 @@ function dbf_update_stats($db_link) {
 
 //
 function dbf_getEntryData($db_link, $entryName, $entryType, $ini_array) {
-	$query = "SELECT * FROM nvdEntry WHERE type = '$entryType' AND name = '$entryName'";
+	$query = "SELECT * FROM nvdData WHERE type = '$entryType' AND name = '$entryName'";
 	if(!$result = mysqli_query($db_link, $query)) {
 		$xml = c_initiate_xml($ini_array);
 		$xml_error = $xml->addchild('error');
