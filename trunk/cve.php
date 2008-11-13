@@ -17,25 +17,17 @@ require 'db_functions.php';
 require 'common_functions.php';
 
 $start_time_epoch = time();
-//$this_programs_version = "0.1"; // Original release
-$this_programs_version = "0.2"; // Updated with better pull of the xml data.
+$this_programs_version = "0.3";
 $this_programs_name = "cve";
 
-// load ini file into an array	
-if (file_exists("local_config.ini")) {
-	$ini_array = parse_ini_file("local_config.ini", true);
+// load config file	
+if (file_exists("local_config.php")) {
+	require 'local_config.php';
 } else {
-	$ini_array = parse_ini_file("config.ini", true); // load the main one
-	if(!$ini_array) {
-		$xml = c_initiate_xml($ini_array);
-		$xml_error = $xml->addchild('error');
-		$xml_error->addchild('code', '500');
-		$xml_error->addchild('description', 'Configuration files were not found.  Please review the http://code.google.com/p/nvdcache/ file.');
-		c_announce($xml);
-	}
+	require 'config.php';
 }
 
-$db_link = dbf_connectDB($ini_array);
+$db_link = dbf_connectDB($config_database);
 
 $cache_stats = dbf_cache_stats($db_link);
 

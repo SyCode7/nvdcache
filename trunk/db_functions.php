@@ -13,7 +13,7 @@ PURPOSE.
 
 */
 
-function dbf_connectDB($ini_array) {
+function dbf_connectDB($database) {
 	$db_link = mysqli_connect($ini_array[database][host], $ini_array[database][user], $ini_array[database][password], $ini_array[database][db_name], $ini_array[database][port], $ini_array[database][socket]);
 	if(!$db_link) {
 		$xml = c_initiate_xml($ini_array);
@@ -96,7 +96,7 @@ function dbf_getEntryData($db_link, $entryName, $entryType, $ini_array) {
 	}
 	
 	// start building the xml data string
-	$xml_parent_start = '<nvdCache version="'.$ini_array[nvdCache][version].'" cacheHost="'.$ini_array[nvdCache][cacheHost].'">';
+	$xml_parent_start = '<nvdCache version="'.$config_nvdcache[version].'" cacheHost="'.$config_nvdcache[cacheHost].'">';
 	$xml_parent_end = '</nvdCache>';
 	
 	while ($row = mysqli_fetch_assoc($result)) {
