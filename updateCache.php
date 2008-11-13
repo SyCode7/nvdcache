@@ -103,7 +103,7 @@ function stream_load_xml($url, $db_link, $config_cve) {
 	if ($config_cve[proxy_url] && $config_cve[proxy_port]) {
 		$opts = array(
 			'http'=>array(
-				'proxy'=>"tcp://x".$config_cve[proxy_url].":".$config_cve[proxy_port],
+				'proxy'=>"tcp://".$config_cve[proxy_url].":".$config_cve[proxy_port],
 				'request_fulluri'=>TRUE
 			)
 		);
