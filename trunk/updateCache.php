@@ -40,7 +40,7 @@ if($cache_stats[last_db_update_epoch] == 1000000) { // new install
 } elseif($cache_stats[hours_since_last_update] > $config_nvdcache[update_freq_hours]) { // she hasn't been updated in the time frame
 	// go and get the modifed file from nvd and run it through the db
 	$url = $config_cve[url_base].$config_cve[url_cve_modified];
-	stream_load_xml($url, $db_link);
+	stream_load_xml($url, $db_link, $config_cve);
 	dbf_update_stats($db_link);
 } else {
 	// nothing for now.
@@ -69,36 +69,29 @@ function full_db_load($config_cve, $db_link) {
 	// year and do a for each back to 2002.
 	//
 	
-	if ($config_cve[proxy_url] && $config_cve[proxy_port]){
-		$url_start = $config_cve[protocol].$config_cve[proxy_url].":".$config_cve[proxy_port]."/";
-	} else
-	{
-		$url_start = $config_cve[protocol];
-	}
+	$url = $config_cve[protocol].$config_cve[url_base].$config_cve[url_cve_year_pre]."2002".$config_cve[url_cve_year_post];
+	stream_load_xml($url, $db_link, $config_cve);
 	
-	$url = $url_start.$config_cve[url_base].$config_cve[url_cve_year_pre]."2002".$config_cve[url_cve_year_post];
-	stream_load_xml($url, $db_link);
+	$url = $config_cve[protocol].$config_cve[url_base].$config_cve[url_cve_year_pre]."2003".$config_cve[url_cve_year_post];
+	stream_load_xml($url, $db_link, $config_cve);
 	
-	$url = $url_start.$config_cve[url_base].$config_cve[url_cve_year_pre]."2003".$config_cve[url_cve_year_post];
-	stream_load_xml($url, $db_link);
+	$url = $config_cve[protocol].$config_cve[url_base].$config_cve[url_cve_year_pre]."2004".$config_cve[url_cve_year_post];
+	stream_load_xml($url, $db_link, $config_cve);
 	
-	$url = $url_start.$config_cve[url_base].$config_cve[url_cve_year_pre]."2004".$config_cve[url_cve_year_post];
-	stream_load_xml($url, $db_link);
+	$url = $config_cve[protocol].$config_cve[url_base].$config_cve[url_cve_year_pre]."2005".$config_cve[url_cve_year_post];
+	stream_load_xml($url, $db_link, $config_cve);
 	
-	$url = $url_start.$config_cve[url_base].$config_cve[url_cve_year_pre]."2005".$config_cve[url_cve_year_post];
-	stream_load_xml($url, $db_link);
+	$url = $config_cve[protocol].$config_cve[url_base].$config_cve[url_cve_year_pre]."2006".$config_cve[url_cve_year_post];
+	stream_load_xml($url, $db_link, $config_cve);
 	
-	$url = $url_start.$config_cve[url_base].$config_cve[url_cve_year_pre]."2006".$config_cve[url_cve_year_post];
-	stream_load_xml($url, $db_link);
+	$url = $config_cve[protocol].$config_cve[url_base].$config_cve[url_cve_year_pre]."2007".$config_cve[url_cve_year_post];
+	stream_load_xml($url, $db_link, $config_cve);
 	
-	$url = $url_start.$config_cve[url_base].$config_cve[url_cve_year_pre]."2007".$config_cve[url_cve_year_post];
-	stream_load_xml($url, $db_link);
+	$url = $config_cve[protocol].$config_cve[url_base].$config_cve[url_cve_year_pre]."2008".$config_cve[url_cve_year_post];
+	stream_load_xml($url, $db_link, $config_cve);
 	
-	$url = $url_start.$config_cve[url_base].$config_cve[url_cve_year_pre]."2008".$config_cve[url_cve_year_post];
-	stream_load_xml($url, $db_link);
-	
-	$url = $url_start.$config_cve[url_base].$config_cve[url_cve_modified];
-	stream_load_xml($url, $db_link);
+	$url = $config_cve[protocol].$config_cve[url_base].$config_cve[url_cve_modified];
+	stream_load_xml($url, $db_link, $config_cve);
 }
 
 function stream_load_xml($url, $db_link) {
@@ -106,7 +99,22 @@ function stream_load_xml($url, $db_link) {
 	$end_delimiter = "</entry>";
 	$byte_chunk_size = 64;
 	
-	$handle = fopen("$url", "r");
+	// see if any of the proxy options were selected and build a stream context if so
+	if ($config_cve[proxy_url] && $config_cve[proxy_port]) {
+		$opts = array(
+			'http'=>array(
+				'proxy'=>"tcp://".$config_cve[proxy_url].":".$config_cve[proxy_port],
+				'request_fulluri'=>TRUE
+			)
+		);
+		
+		$context = context_create_stream($opts);
+		
+		$handle = fopen("$url", "r", $context);
+	}else {
+		$handle = fopen("$url", "r");
+	}
+	
 	if(!$handle) {
 		$xml = c_initiate_xml($config_nvdcache);
 		$xml_error = $xml->addchild('error');
