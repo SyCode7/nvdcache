@@ -17,24 +17,17 @@ require 'db_functions.php';
 require 'common_functions.php';
 
 $start_time_epoch = time();
-$this_programs_version = "0.1"; // Original release
-$this_programs_name = "updateDataSource";
+$this_programs_version = "0.3";
+$this_programs_name = "updateCache";
 
-// load ini file into an array	
-if (file_exists("local_config.ini")) {
-	$ini_array = parse_ini_file("local_config.ini", true);
+// load config file	
+if (file_exists("local_config.php")) {
+	require 'local_config.php';
 } else {
-	$ini_array = parse_ini_file("config.ini", true); // load the main one
-	if(!$ini_array) {
-		$xml = c_initiate_xml($ini_array);
-		$xml_error = $xml->addchild('error');
-		$xml_error->addchild('code', '500');
-		$xml_error->addchild('description', 'Configuration files were not found.  Please see http://code.google.com/p/nvdcache/ for information.');
-		c_announce($xml);
-	}
+	require 'config.php';
 }
 
-$db_link = dbf_connectDB($ini_array);
+$db_link = dbf_connectDB($config_database);
 
 // grab the cache stats from the table.  This will tell us the last time the db was updated (if at all)
 $cache_stats = dbf_cache_stats($db_link);
@@ -44,7 +37,7 @@ if($cache_stats[last_db_update_epoch] == 1000000) { // new install
 	full_db_load($ini_array, $db_link);
 	dbf_update_stats($db_link);
 	$cache_stats = dbf_cache_stats($db_link);
-} elseif($cache_stats[hours_since_last_update] > $ini_array[nvdCache][update_freq_hours]) { // she hasn't been updated in the time frame
+} elseif($cache_stats[hours_since_last_update] > $config_nvdcache[update_freq_hours]) { // she hasn't been updated in the time frame
 	// go and get the modifed file from nvd and run it through the db
 	$url = $ini_array[cve][url_base].$ini_array[cve][url_cve_modified];
 	stream_load_xml($url, $db_link);

@@ -17,26 +17,19 @@ require 'db_functions.php';
 require 'common_functions.php';
 
 $start_time_epoch = time();
-$this_programs_version = "0.1"; // Original release
-$this_programs_name = "cve";
+$this_programs_version = "0.3";
+$this_programs_name = "cacheStats";
 
-// load ini file into an array	
-if (file_exists("local_config.ini")) {
-	$ini_array = parse_ini_file("local_config.ini", true);
+// load config file	
+if (file_exists("local_config.php")) {
+	require 'local_config.php';
 } else {
-	$ini_array = parse_ini_file("config.ini", true); // load the main one
-	if(!$ini_array) {
-		$xml = c_initiate_xml($ini_array);
-		$xml_error = $xml->addchild('error');
-		$xml_error->addchild('code', '500');
-		$xml_error->addchild('description', 'Configuration files were not found.  Please review the http://code.google.com/p/nvdcache/ file.');
-		c_announce($xml);
-	}
+	require 'config.php';
 }
 
 // gather data on connection call to db
 $start_db_con_call = time();
-$db_link = dbf_connectDB($ini_array);
+$db_link = dbf_connectDB($config_database);
 $end_db_con_call = time();
 $seconds_to_make_con = $end_db_con_call - $start_db_con_call;
 

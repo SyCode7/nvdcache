@@ -1,3 +1,4 @@
+<?php
 /*
 nvdCache
 Copyright (c) 2007 The Hursk Group, LLC. All rights reserved.
@@ -12,27 +13,29 @@ PURPOSE.
 
 */
 
-[database]
-$host =		"" //hostname or ip addr of db
-user = 		"" //user name to connect as
-password = 	"" //user password
-db_name = 	"nvdCache" //Should be nvdCache, but could be different
-port = 		"3306" //3306 is the standard MySQL port
-socket = 	"" //Socket file
+// nvdCache infomration
+$config_nvdcache[version] = "0.3"
+$config_nvdcache[update_freq_hours] = "12";
+$config_nvdcache[supported_nvd_xml_version] = "1.2";
+$config_nvdcache[cacheHost] = ""; //if you're hosting the data put your name here
 
-[security]
-token_required = 	"0" //will the program calling this cache be required to hand over the access token below
-access_token = 		"" //you would put the token data in this filed.
+// database stuff
+$config_database[host] = ""; //hostname or ip addr of db
+$config_database[user] = ""; //user name to connect as
+$config_database[password] = ""; //user password
+$config_database[db_name] = "nvdCache"; //Should be nvdCache, but could be different
+$config_database[port] = "3306"; //3306 is the standard MySQL port
+$config_database[socket] = ""; //Socket file
 
-[nvdCache]
-version = "0.2"
-update_freq_hours = "12"
-supported_nvd_xml_version = "1.2"
-cacheHost = "" //if you're hosting the data put your name here
+// token related (this will probably be going away soon) <-- 11-2008
+$config_sec[token_required] = "0"; //will the program calling this cache be required to hand over the access token below
+$config_sec[access_token] = ""; //you would put the token data in this filed.
 
-[cve]
-url_base = "http://nvd.nist.gov/download/"
-url_cve_modified = "nvdcve-modified.xml"
-url_cve_recent = "nvdcve-recent.xml"
-url_cve_year_pre = "nvdcve-"
-url_cve_year_post = ".xml"
+// cve repository information
+$config_cve[url_base] = "http://nvd.nist.gov/download/";
+$config_cve[url_cve_modified] = "nvdcve-modified.xml";
+$config_cve[url_cve_recent] = "nvdcve-recent.xml";
+$config_cve[url_cve_year_pre] = "nvdcve-";
+$config_cve[url_cve_year_post] = ".xml";
+
+?>
