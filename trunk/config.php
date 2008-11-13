@@ -14,7 +14,7 @@ PURPOSE.
 */
 
 // nvdCache infomration
-$config_nvdcache[version] = "0.3"
+$config_nvdcache[version] = "0.3";
 $config_nvdcache[update_freq_hours] = "12";
 $config_nvdcache[supported_nvd_xml_version] = "1.2";
 $config_nvdcache[cacheHost] = ""; //if you're hosting the data put your name here
