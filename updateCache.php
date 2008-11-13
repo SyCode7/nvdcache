@@ -94,7 +94,7 @@ function full_db_load($config_cve, $db_link) {
 	stream_load_xml($url, $db_link, $config_cve);
 }
 
-function stream_load_xml($url, $db_link) {
+function stream_load_xml($url, $db_link, $config_cve) {
 	$start_delimiter = "<entry ";
 	$end_delimiter = "</entry>";
 	$byte_chunk_size = 64;
@@ -103,7 +103,7 @@ function stream_load_xml($url, $db_link) {
 	if ($config_cve[proxy_url] && $config_cve[proxy_port]) {
 		$opts = array(
 			'http'=>array(
-				'proxy'=>"tcp://".$config_cve[proxy_url].":".$config_cve[proxy_port],
+				'proxy'=>"tcp://x".$config_cve[proxy_url].":".$config_cve[proxy_port],
 				'request_fulluri'=>TRUE
 			)
 		);
