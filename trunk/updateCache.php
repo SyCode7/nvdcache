@@ -108,7 +108,7 @@ function stream_load_xml($url, $db_link, $config_cve) {
 			)
 		);
 		
-		$context = context_create_stream($opts);
+		$context = stream_context_create($opts);
 		
 		$handle = fopen("$url", "r", $context);
 	}else {
