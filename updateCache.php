@@ -62,7 +62,7 @@ $xml_msg->addchild('oldest_update_item_epoch', $oldest_update_epoch);
 c_announce($xml);
 
 
-function full_db_load($ini_array, $db_link) {
+function full_db_load($config_cve, $db_link) {
 	
 	// 
 	// below has been implemented very poorly.  It must be re-written to just figure the currrent
