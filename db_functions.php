@@ -77,7 +77,7 @@ function dbf_update_stats($db_link) {
 }
 
 //
-function dbf_getEntryData($db_link, $entryName, $entryType, $ini_array) {
+function dbf_getEntryData($db_link, $entryName, $entryType, $config_nvdcache) {
 	$query = "SELECT * FROM nvdData WHERE type = '$entryType' AND name = '$entryName'";
 	if(!$result = mysqli_query($db_link, $query)) {
 		$xml = c_initiate_xml($config_nvdcache);
