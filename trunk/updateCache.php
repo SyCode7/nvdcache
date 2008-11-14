@@ -39,7 +39,7 @@ if($cache_stats[last_db_update_epoch] == 1000000) { // new install
 	$cache_stats = dbf_cache_stats($db_link);
 } elseif($cache_stats[hours_since_last_update] > $config_nvdcache[update_freq_hours]) { // she hasn't been updated in the time frame
 	// go and get the modifed file from nvd and run it through the db
-	$url = $config_cve[url_base].$config_cve[url_cve_modified];
+	$url = $config_cve[protocol].$config_cve[url_base].$config_cve[url_cve_modified];
 	stream_load_xml($url, $db_link, $config_cve);
 	dbf_update_stats($db_link);
 } else {
