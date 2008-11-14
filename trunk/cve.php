@@ -56,7 +56,7 @@ if(!$regex_status || !$cve_id) {
 // everything looks good to this point.  We will now pull together the data from the db and build an xml string to return.
 //
 
-$xml_cve = dbf_getEntryData($db_link, strtoupper($cve_id), 'CVE', $ini_array);
+$xml_cve = dbf_getEntryData($db_link, strtoupper($cve_id), 'CVE', $config_nvdcache);
 
 //echo $xml_cve;
 
