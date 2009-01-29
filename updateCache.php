@@ -90,6 +90,9 @@ function full_db_load($config_cve, $db_link) {
 	$url = $config_cve[protocol].$config_cve[url_base].$config_cve[url_cve_year_pre]."2008".$config_cve[url_cve_year_post];
 	stream_load_xml($url, $db_link, $config_cve);
 	
+	$url = $config_cve[protocol].$config_cve[url_base].$config_cve[url_cve_year_pre]."2009".$config_cve[url_cve_year_post];
+	stream_load_xml($url, $db_link, $config_cve);
+	
 	$url = $config_cve[protocol].$config_cve[url_base].$config_cve[url_cve_modified];
 	stream_load_xml($url, $db_link, $config_cve);
 }
