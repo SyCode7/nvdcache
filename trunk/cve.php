@@ -15,6 +15,9 @@ PURPOSE.
 
 require 'db_functions.php';
 require 'common_functions.php';
+// used to track who's using system and throttle
+// requests later on
+require 'common_functions_token_access.php';
 
 $start_time_epoch = time();
 $this_programs_version = "0.3";
@@ -30,6 +33,9 @@ if (file_exists("local_config.php")) {
 $db_link = dbf_connectDB($config_database);
 
 $cache_stats = dbf_cache_stats($db_link);
+
+// log hit to service
+fta_logHit($_SERVER, $fta_config_data);
 
 $cve_id = $_REQUEST['cve_id'];
 $token = $_REQUEST['token'];
