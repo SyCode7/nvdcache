@@ -41,4 +41,13 @@ $config_cve[url_cve_recent] = "nvdcve-recent.xml";
 $config_cve[url_cve_year_pre] = "nvdcve-";
 $config_cve[url_cve_year_post] = ".xml";
 
+// token access stuff
+$fta_config_data[reverse_proxy] = 1; // 1 for behind proxy 0 for not
+$fta_config_data[db][host] = ""; //hostname or ip addr of db
+$fta_config_data[db][user] = ""; //user name to connect as
+$fta_config_data[db][password] = ""; //user password
+$fta_config_data[db][db_name] = "token_access"; //Should be NSRL, but could be different
+$fta_config_data[db][port] = "3306"; //3306 is the standard MySQL port
+$fta_config_data[db][socket] = ""; //Socket file
+
 ?>
