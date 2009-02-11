@@ -1,4 +1,30 @@
+/* @override http://hursk.com/nvdcache/cve/nvdCache-style.css */
+
 /* nvdCache-style.css */
-nvdCache { font-family: sans-serif; background: white; color: black }
-desc { margin: 1em; color: red }
+nvdCache {
+	border: 5px double #333;
+	background: #e6e6e6;
+	display: inline;
+	float: none;
+	margin-right: 20px;
+	margin-left: 20px;
+	margin-top: 20px;
+	font: normal normal 1em "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	color: #000;
+	padding: 20px;
+}
+
+nvdCache:before {
+	content: 'nvdCache result response';
+	color: #0f0085;
+}
+
+desc {
+	color: black;
+}
+
+desc:before { 
+	content: 'Description: ';
+}
+
 refs { text-align: right; margin-bottom: 2em }
