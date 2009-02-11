@@ -14,7 +14,8 @@ PURPOSE.
 */
 
 function c_initiate_xml($config_nvdcache) {
-	$xml_string = '<nvdCache version="'.$config_nvdcache[version].'" cacheHost="'.$config_nvdcache[cacheHost].'"></nvdCache>';
+	$xml_string = '<?xml-stylesheet href="nvdCache-style.css" type="text/css"?>
+	<nvdCache version="'.$config_nvdcache[version].'" cacheHost="'.$config_nvdcache[cacheHost].'"></nvdCache>';
 	$xml = new SimpleXMLElement($xml_string);
 	return $xml;
 }
