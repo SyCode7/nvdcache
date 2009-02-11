@@ -97,7 +97,7 @@ function dbf_getEntryData($db_link, $entryName, $entryType, $config_nvdcache) {
 	
 	// start building the xml data string
 	
-	$xml_parent_start = '<?xml-stylesheet href="nvdCache-style.css" type="text/css"?>';
+	$xml_parent_start = '<?xml-stylesheet href="../nvdCache-style.css" type="text/css"?>';
 	$xml_parent_start .= '<nvdCache version="'.$config_nvdcache[version].'" cacheHost="'.$config_nvdcache[cacheHost].'">';
 	$xml_parent_end = '</nvdCache>';
 	
