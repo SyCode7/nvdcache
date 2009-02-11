@@ -13,10 +13,17 @@ PURPOSE.
 
 */
 
-function c_initiate_xml($config_nvdcache) {
-	$xml_string = '<nvdCache version="'.$config_nvdcache[version].'" cacheHost="'.$config_nvdcache[cacheHost].'"></nvdCache>';
-	$xml = new SimpleXMLElement($xml_string);
-	return $xml;
+function c_initiate_xml($config_nvdcache, $text="0") {
+	$xml_string = '<?xml-stylesheet href="nvdCache-style.css" type="text/css"?>';
+	$xml_string .= '<nvdCache version="'.$config_nvdcache[version].'" cacheHost="'.$config_nvdcache[cacheHost].'"></nvdCache>';
+	
+	if($text) {
+		return $xml_string;
+	} else {
+		$xml = new SimpleXMLElement($xml_string);
+		return $xml;
+	}
+	
 }
 
 function c_announce($xml) {
