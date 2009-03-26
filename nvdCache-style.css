@@ -2,8 +2,8 @@
 
 /* nvdCache-style.css */
 nvdCache {
-	color: white;
 	border: 5px double #333;
+	background: #e6e6e6;
 	display: inline;
 	float: none;
 	margin-right: 20px;
