@@ -2,15 +2,14 @@
 
 /* nvdCache-style.css */
 nvdCache {
+	color: white;
 	border: 5px double #333;
-	background: #e6e6e6;
 	display: inline;
 	float: none;
 	margin-right: 20px;
 	margin-left: 20px;
 	margin-top: 20px;
 	font: normal normal 1em "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
-	color: #000;
 	padding: 20px;
 	background: url("compass.png") no-repeat fixed center center;
 }
