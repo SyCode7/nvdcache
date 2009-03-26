@@ -21,13 +21,6 @@ nvdCache:before {
 	font-weight: bold;
 }
 
-nvdCache:before {
-	content: 'mother';
-	color: #0f0085;
-	font-size: 1em;
-	font-weight: bold;
-}
-
 desc {
 	padding: 10px;
 	position: static;
