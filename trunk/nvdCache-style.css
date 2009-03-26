@@ -12,6 +12,7 @@ nvdCache {
 	font: normal normal 1em "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
 	color: #000;
 	padding: 20px;
+	background: url("compass.png") no-repeat fixed center center;
 }
 
 nvdCache:before {
