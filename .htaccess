@@ -1,3 +1,2 @@
-<FilesMatch "^cve$">
-    ForceType application/x-httpd-php
-</FilesMatch>
+RewriteEngine on
+RewriteRule ^(.*)\.htm$ $1.php [NC]>
