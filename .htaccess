@@ -1,2 +1,2 @@
 RewriteEngine on
-RewriteRule ^cve(*)$ /cve.php?$1 [L,NC]
+RewriteRule ^cve-(.*)$ /cve.php?$1 [L,NC]
