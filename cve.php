@@ -39,6 +39,10 @@ $cache_stats = dbf_cache_stats($db_link);
 
 
 /* parse the URL */
+
+echo $HTTP_SERVER_VARS["REQUEST_URI"];
+/*
+
 $exp1 = explode("/",$HTTP_SERVER_VARS["REQUEST_URI"]);
 // $hash is the value passed to the script.  this needs to be handled carefuly!
 $cve_id = $exp1[count($exp1)-1];
@@ -73,5 +77,6 @@ $xml_cve = dbf_getEntryData($db_link, strtoupper($cve_id), 'CVE', $config_nvdcac
 //echo $xml_cve;
 
 c_announce($xml_cve);
+*/
 
 ?>
