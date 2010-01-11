@@ -35,7 +35,7 @@ $db_link = dbf_connectDB($config_database);
 $cache_stats = dbf_cache_stats($db_link);
 
 // log hit to service
-fta_logHit($_SERVER, $fta_config_data);
+//fta_logHit($_SERVER, $fta_config_data);
 
 
 /* parse the URL */
