@@ -17,7 +17,7 @@ require 'db_functions.php';
 require 'common_functions.php';
 // used to track who's using system and throttle
 // requests later on
-require 'common_functions_token_access.php';
+//require 'common_functions_token_access.php';
 
 $start_time_epoch = time();
 $this_programs_version = "0.3";
