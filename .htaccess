@@ -1,2 +1,2 @@
 RewriteEngine on
-RewriteRule ^cve(\-[0-9]{4}\-[0-9]{4})$ /cve.php?$1 [L,NC]
+RewriteRule ^cve(\-[0-9]{4}\-[0-9]{4})$ /WrtASQEmZLEvgFFkC0grYvvCHNbAzx/cve.php?$1 [L,NC]
